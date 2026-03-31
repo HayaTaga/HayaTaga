@@ -2,79 +2,87 @@
 layout: default
 ---
 <div class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </h1>
-    <p class="desc">{{ page.subtitle }}</p>
+  <header class="post-header about-header">
+    <h1 class="post-title">{{ site.title }}</h1>
+    {% if page.subtitle %}
+      <p class="desc">{{ page.subtitle }}</p>
+    {% endif %}
   </header>
 
-  <article>
-    {% if page.profile %}
-      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
-        {% if page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
-          {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
-          {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
-      rounded' %}
+  <article class="about-content">
+    {% assign normalized_content = content | replace: '<hr />', '<hr>' %}
+    {% assign about_sections = normalized_content | split: '<hr>' %}
+    {% assign intro_content = about_sections | first %}
+    {% assign profile_align = page.profile.align | default: 'right' %}
+    {% assign github_username = site.data.socials.github_username %}
+    {% assign linkedin_username = site.data.socials.linkedin_username %}
+
+    {% if intro_content != blank or page.profile %}
+      <div class="about-intro align-{{ profile_align }}">
+        {% if page.profile.image and profile_align == 'left' %}
+          <div class="about-portrait">
+            <img
+              src="{{ '/assets/img/' | append: page.profile.image | relative_url }}"
+              alt="{{ site.title }}"
+              loading="eager"
+            >
+          </div>
+        {% endif %}
+
+        <div class="about-intro-copy">
+          {% if intro_content != blank %}
+            <div class="about-intro-text">{{ intro_content }}</div>
           {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-      30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
-            cache_bust=true
-          %}
-        {% endif %}
-        {% if page.profile.more_info %}
-          <div class="more-info">{{ page.profile.more_info }}</div>
+
+          {% if page.profile.more_info %}
+            <div class="about-contact">{{ page.profile.more_info }}</div>
+          {% endif %}
+        </div>
+
+        {% if page.profile.image and profile_align != 'left' %}
+          <div class="about-portrait">
+            <img
+              src="{{ '/assets/img/' | append: page.profile.image | relative_url }}"
+              alt="{{ site.title }}"
+              loading="eager"
+            >
+          </div>
         {% endif %}
       </div>
     {% endif %}
 
-    <div class="clearfix">{{ content }}</div>
-
-    <!-- News -->
-    {% if page.announcements and page.announcements.enabled %}
-      <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
-      </h2>
-      {% include news.liquid limit=true %}
-    {% endif %}
-
-    <!-- Latest posts -->
-    {% if page.latest_posts and page.latest_posts.enabled %}
-      <h2>
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
-      </h2>
-      {% include latest_posts.liquid %}
-    {% endif %}
-
-    <!-- Selected papers -->
-    {% if page.selected_papers %}
-      <h2>
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
-      </h2>
-      {% include selected_papers.liquid %}
-    {% endif %}
-
-    <!-- Social -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% include social.liquid %}</div>
-
-        <div class="contact-note">{{ site.contact_note }}</div>
+    {% if about_sections.size > 1 %}
+      <div class="about-body">
+        {% for section in about_sections offset: 1 %}
+          <hr>
+          {{ section }}
+        {% endfor %}
       </div>
     {% endif %}
 
-    {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
-      {% include newsletter.liquid center=true %}
+    {% if page.social and github_username or page.social and linkedin_username %}
+      <div class="about-links" aria-label="Social links">
+        {% if github_username %}
+          <a href="https://github.com/{{ github_username }}" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2.17c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.74.4-1.25.73-1.53-2.56-.3-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.2-3.12-.12-.3-.52-1.5.12-3.13 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.82 0c2.22-1.5 3.2-1.2 3.2-1.2.64 1.64.24 2.84.12 3.14.75.82 1.2 1.85 1.2 3.12 0 4.45-2.7 5.4-5.28 5.7.42.37.78 1.08.78 2.18v3.24c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+        {% endif %}
+        {% if linkedin_username %}
+          <a href="https://www.linkedin.com/in/{{ linkedin_username }}" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4.98 3.5A2.48 2.48 0 1 0 5 8.46 2.48 2.48 0 0 0 4.98 3.5ZM2.75 9.75h4.46v11.75H2.75V9.75Zm7.25 0h4.27v1.6h.06c.6-1.13 2.05-2.32 4.22-2.32 4.5 0 5.33 2.96 5.33 6.8v5.67h-4.45v-5.03c0-1.2-.02-2.75-1.68-2.75-1.68 0-1.94 1.3-1.94 2.65v5.13H10V9.75Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+        {% endif %}
+      </div>
     {% endif %}
   </article>
 </div>

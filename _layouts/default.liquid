@@ -1,10 +1,24 @@
 <!doctype html>
-<html lang="{{ site.lang }}">
-  <!-- Head -->
+<html lang="{{ site.lang | default: 'en' }}">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+      (() => {
+        const storageKey = "theme";
+        const legacyKey = "theme-preference";
+        const normalizeThemeSetting = (value) => value === "light" || value === "dark" || value === "system" ? value : "system";
+        const savedThemeSetting = normalizeThemeSetting(localStorage.getItem(storageKey) || localStorage.getItem(legacyKey));
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const computedTheme = savedThemeSetting === "system" ? (prefersDark ? "dark" : "light") : savedThemeSetting;
+        document.documentElement.dataset.theme = computedTheme;
+        document.documentElement.dataset.themeSetting = savedThemeSetting;
+      })();
+    </script>
     {% if page.redirect %}
       {% if page.redirect == true %}
-        {% assign redirect = site.baseurl | append: '/' %}
+        {% assign redirect = '/' | relative_url %}
       {% elsif page.redirect contains '://' %}
         {% assign redirect = page.redirect %}
       {% else %}
@@ -12,45 +26,108 @@
       {% endif %}
       <meta http-equiv="refresh" content="3; url={{ redirect }}">
     {% endif %}
-    {% include head.liquid %}
+    <title>{% if page.title and page.title != 'home' %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   </head>
+  <body>
+    <header class="site-header py-3 mb-5">
+      <div class="container">
+        <div class="site-header-inner">
+          <a class="site-title h4 m-0 text-decoration-none" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+          <button id="light-toggle" type="button" aria-label="Change theme" title="Change theme">
+            <svg id="light-toggle-system" class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 3.25v2.1M12 18.65v2.1M4.25 12h2.1M17.65 12h2.1M6.52 6.52l1.48 1.48M16 16l1.48 1.48M17.48 6.52L16 8M8 16l-1.48 1.48"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="1.8"
+              />
+              <path
+                d="M14.85 8.2a4.5 4.5 0 1 0 .95 6.63 4.65 4.65 0 1 1-.95-6.63Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+              />
+            </svg>
+            <svg id="light-toggle-dark" class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M14.72 3.24a.75.75 0 0 1 .88.9 7.75 7.75 0 1 0 10.26 10.26.75.75 0 0 1 .9.88A9.5 9.5 0 1 1 14.72 3.24Z"
+                fill="currentColor"
+                transform="translate(-3 -3)"
+              />
+            </svg>
+            <svg id="light-toggle-light" class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+              <path
+                d="M12 2.35v2.35M12 19.3v2.35M4.7 4.7l1.7 1.7M17.6 17.6l1.7 1.7M2.35 12h2.35M19.3 12h2.35M4.7 19.3l1.7-1.7M17.6 6.4l1.7-1.7"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="1.8"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
 
-  <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
-    <!-- Header -->
-    {% include header.liquid %}
+    <main class="container pb-5" role="main">
+      {{ content }}
+    </main>
+    <script>
+      (() => {
+        const storageKey = "theme";
+        const legacyKey = "theme-preference";
+        const root = document.documentElement;
+        const toggle = document.getElementById("light-toggle");
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        if (!toggle) return;
 
-    <!-- Content -->
-    <div class="container mt-5" role="main">
-      {% if page.toc and page.toc.sidebar %}
-        {% if page.toc.sidebar == 'right' %}
-          <div class="row">
-            <!-- main content area -->
-            <div class="col-sm-9">{{ content }}</div>
-            <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
-            </div>
-          </div>
-        {% else %}
-          <div class="row">
-            <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
-            </div>
-            <!-- main content area -->
-            <div class="col-sm-9">{{ content }}</div>
-          </div>
-        {% endif %}
-      {% else %}
-        {{ content }}
-      {% endif %}
-    </div>
+        const normalizeThemeSetting = (value) => value === "light" || value === "dark" || value === "system" ? value : "system";
+        const determineThemeSetting = () => normalizeThemeSetting(localStorage.getItem(storageKey) || localStorage.getItem(legacyKey));
+        const determineComputedTheme = (themeSetting) => themeSetting === "system" ? (mediaQuery.matches ? "dark" : "light") : themeSetting;
 
-    <!-- Footer -->
-    {% include footer.liquid %}
+        const applyTheme = (themeSetting) => {
+          root.dataset.themeSetting = themeSetting;
+          root.dataset.theme = determineComputedTheme(themeSetting);
+          toggle.setAttribute("title", `Change theme (${themeSetting})`);
+          toggle.setAttribute("aria-label", `Change theme (${themeSetting})`);
+        };
 
-    <!-- JavaScripts -->
-    {% include scripts.liquid %}
+        const cycleThemeSetting = (themeSetting) => {
+          if (themeSetting === "system") return "light";
+          if (themeSetting === "light") return "dark";
+          return "system";
+        };
+
+        toggle.addEventListener("click", () => {
+          const nextThemeSetting = cycleThemeSetting(root.dataset.themeSetting || determineThemeSetting());
+          localStorage.setItem(storageKey, nextThemeSetting);
+          localStorage.removeItem(legacyKey);
+          applyTheme(nextThemeSetting);
+        });
+
+        if (typeof mediaQuery.addEventListener === "function") {
+          mediaQuery.addEventListener("change", () => {
+            if ((root.dataset.themeSetting || determineThemeSetting()) === "system") {
+              applyTheme("system");
+            }
+          });
+        } else if (typeof mediaQuery.addListener === "function") {
+          mediaQuery.addListener(() => {
+            if ((root.dataset.themeSetting || determineThemeSetting()) === "system") {
+              applyTheme("system");
+            }
+          });
+        }
+
+        applyTheme(determineThemeSetting());
+      })();
+    </script>
   </body>
 </html>
