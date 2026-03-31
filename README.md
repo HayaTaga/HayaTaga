@@ -15,26 +15,7 @@ trimmed down to a simpler personal-site setup.
 - Spatial econometrics
 - Network models
 
-## Local Development
 
-```bash
-bundle install
-bundle exec jekyll serve
-```
-
-Then open `http://127.0.0.1:4000/HayaTaga/`.
-
-## Build
-
-```bash
-bundle exec jekyll build
-```
-
-The generated site is written to `_site/`.
-
-## Deployment
-
-Deployment is handled by GitHub Actions on pushes to `main` or `master`.
 
 ## Credit
 
