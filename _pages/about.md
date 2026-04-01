@@ -24,9 +24,10 @@ From April 2026, I am supported by the Japan Society for the Promotion of Scienc
 
 ---
 
-## Programming Skills
+## Technical Skills
 
 - **Languages:** Python, R, Julia, SQL
+- **Tools:** Git, Docker
 
 ---
 
@@ -64,4 +65,4 @@ From April 2026, I am supported by the Japan Society for the Promotion of Scienc
 
 - **Data Engineer / Data Scientist**, April 2024 – Present
   - Built and maintained data pipelines and analytics infrastructure for internal decision-making and client-facing analytical projects.  
-  - Tools: Python, SQL, dbt, Snowflake, Airflow.
+  - Tools: Python, SQL, dbt, Snowflake, Airflow, Git, Docker, Terraform.
