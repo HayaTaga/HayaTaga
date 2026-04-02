@@ -15,7 +15,7 @@ profile:
 social: true
 ---
 
-I am a PhD student at the Graduate School of Economics, University of Tokyo. 
+I am a PhD candidate at the Graduate School of Economics, University of Tokyo. 
 
 My research focuses on **econometrics**, **panel data analysis**, **causal inference**, and **spatial econometrics**. 
 I am currently interested in the identification and estimation of **network models**. 
