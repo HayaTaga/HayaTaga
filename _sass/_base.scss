@@ -60,6 +60,10 @@ table.table a {
   gap: 1rem;
 }
 
+.site-header-inner-no-title {
+  justify-content: flex-end;
+}
+
 .site-title {
   color: var(--global-text-color);
 
@@ -67,6 +71,43 @@ table.table a {
     color: var(--global-text-color);
     text-decoration: none;
   }
+}
+
+.site-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.language-switch-link,
+.language-switch-current,
+.language-switch-separator {
+  color: var(--global-text-color);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.language-switch-link {
+  text-decoration: none;
+
+  &:hover {
+    color: var(--global-theme-color);
+  }
+}
+
+.language-switch-current {
+  color: var(--global-theme-color);
+  font-weight: 600;
+}
+
+.language-switch-separator {
+  opacity: 0.45;
 }
 
 #light-toggle {

@@ -2,7 +2,10 @@
 layout: about
 title: home
 permalink: /
-subtitle: Faculty of Economics, Graduate School of Economics, University of Tokyo
+subtitle: Faculty of Economics, Graduate School of Economics, University of Tokyo (PhD program)
+lang: en
+translation_url: /ja/
+hide_header_title: true
 
 profile:
   align: right
@@ -15,12 +18,8 @@ profile:
 social: true
 ---
 
-I am a PhD candidate at the Graduate School of Economics, University of Tokyo. 
-
-My research focuses on **econometrics**, **panel data analysis**, **causal inference**, and **spatial econometrics**. 
-I am currently interested in the identification and estimation of **network models**. 
-
-From April 2026, I am supported by the Japan Society for the Promotion of Science (JSPS) Research Fellowship for Young Scientists (DC2).
+- Research fields: **econometrics**, **panel data analysis**, **causal inference**, and **spatial econometrics**
+- JSPS Research Fellow DC2 (April 2026–present)
 
 ---
 
@@ -35,15 +34,24 @@ From April 2026, I am supported by the Japan Society for the Promotion of Scienc
 
 - **Identification and Bayesian Inference for Synthetic Control Methods with Spillover Effects**
   (with [Shosei Sakaguchi](https://sites.google.com/view/shoseisakaguchi))
-  *The Econometrics Journal* (forthcoming)
+  *The Econometrics Journal*
+  [\[journal\]](https://academic.oup.com/ectj/advance-article-abstract/doi/10.1093/ectj/utag006/8667141?redirectedFrom=fulltext)
   [\[arXiv\]](https://arxiv.org/abs/2408.00291)
+
+---
+
+## Working Papers
+
+- **Identification and Estimation of Staggered Difference-in-Differences with Network Spillovers**
+  [\[arXiv\]](https://arxiv.org/abs/2605.15119)
 
 ---
 
 ## Presentations
 
 - **International Panel Data Conference (IPDC) 2026** — Exeter, UK (July 2026, scheduled)
-- **International Symposium on Econometric Theory and Applications (SETA) 2026** - Tokyo, Japan (June 2026, scheduled)
+- **International Symposium on Econometric Theory and Applications (SETA) 2026** — Tokyo, Japan (June 2026)
+  - Structural Break Detection in Spatial Autoregressive Model Using GMM
 - **Kansai Econometrics Study Group Meeting** — January 10–11, 2026
   - Structural Break Detection in Spatial Autoregressive Model Using GMM
 - **LMU-Todai Econometrics Workshop** — September 2025
