@@ -1,0 +1,15 @@
+{% if page.lang == 'en' or page.lang == 'ja' %}
+  <nav class="language-switch" aria-label="Language">
+    {% if page.lang == 'ja' %}
+      <span class="language-switch-current" aria-current="page">JP</span>
+    {% else %}
+      <a class="language-switch-link" href="{{ page.translation_url | relative_url }}">JP</a>
+    {% endif %}
+    <span class="language-switch-separator" aria-hidden="true">/</span>
+    {% if page.lang == 'en' %}
+      <span class="language-switch-current" aria-current="page">EN</span>
+    {% else %}
+      <a class="language-switch-link" href="{{ page.translation_url | relative_url }}">EN</a>
+    {% endif %}
+  </nav>
+{% endif %}

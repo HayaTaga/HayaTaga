@@ -141,6 +141,8 @@ table.table a {
 .theme-toggle-icon {
   width: 1.35rem;
   height: 1.35rem;
+  display: block;
+  margin: 0;
   pointer-events: none;
 }
 
@@ -604,7 +606,6 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-#light-toggle,
 #search-toggle {
   padding: 0;
   border: 0;
