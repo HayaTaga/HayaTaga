@@ -49,8 +49,11 @@ social: true
 
 ## Presentations
 
-- **International Panel Data Conference (IPDC) 2026** — Exeter, UK (July 2026, scheduled)
-- **International Symposium on Econometric Theory and Applications (SETA) 2026** — Tokyo, Japan (June 2026)
+- **Summer Workshop on Economic Theory (SWET) 2026** — August 4, 2026 (Otaru, Hokkaido, Japan)
+  - Identification and Estimation of Staggered Difference-in-Differences with Network Spillovers
+- **International Panel Data Conference (IPDC) 2026** — July 6–7, 2026 (Exeter, UK)
+  - Structural Break Detection in Spatial Autoregressive Model Using GMM
+- **International Symposium on Econometric Theory and Applications (SETA) 2026** — June 11–12, 2026 (Tokyo, Japan)
   - Structural Break Detection in Spatial Autoregressive Model Using GMM
 - **Kansai Econometrics Study Group Meeting** — January 10–11, 2026
   - Structural Break Detection in Spatial Autoregressive Model Using GMM

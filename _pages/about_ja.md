@@ -52,8 +52,11 @@ social: true
 
 ## 発表
 
-- **International Panel Data Conference (IPDC) 2026** — Exeter, UK (2026年7月予定)
-- **International Symposium on Econometric Theory and Applications (SETA) 2026** — 東京, 日本 (2026年6月)
+- **Summer Workshop on Economic Theory (SWET) 2026** — 2026年8月4日（北海道・小樽）
+  - Identification and Estimation of Staggered Difference-in-Differences with Network Spillovers
+- **International Panel Data Conference (IPDC) 2026** — 2026年7月6–7日（Exeter, UK）
+  - Structural Break Detection in Spatial Autoregressive Model Using GMM
+- **International Symposium on Econometric Theory and Applications (SETA) 2026** — 2026年6月11–12日（東京, 日本）
   - Structural Break Detection in Spatial Autoregressive Model Using GMM
 - **関西計量経済学研究会** — 2026年1月10–11日
   - Structural Break Detection in Spatial Autoregressive Model Using GMM
@@ -77,3 +80,13 @@ social: true
 - **データエンジニア / データサイエンティスト**, 2024年4月–現在
   - 社内の意思決定および顧客向け分析プロジェクトのためのデータパイプラインと分析基盤を構築・運用。
   - ツール: Python, SQL, dbt, Snowflake, Airflow, Git, Docker, Terraform.
+
+---
+
+## 略歴
+
+- 2017年3月　石川県立金沢泉丘高等学校 卒業
+- 2022年3月　東京大学経済学部 卒業
+- 2024年3月　東京大学大学院経済学研究科 修士課程 修了
+- 2024年4月–現在　データエンジニア／データサイエンティスト
+- 2025年4月–現在　東京大学大学院経済学研究科 博士課程
